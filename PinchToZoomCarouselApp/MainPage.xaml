@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControl="clr-namespace:PinchToZoomCarouselApp.CustomControls"
+             x:Class="PinchToZoomCarouselApp.MainPage">
+
+    <Grid Padding="15,15,15,50"
+          RowDefinitions="*,Auto">
+        <CarouselView Grid.RowSpan="2"
+                      IndicatorView="JobIndicator"
+                      IsScrollAnimated="False"
+                      Loop="False"
+                      IsBounceEnabled="True"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand"
+                      ItemsSource="{Binding ImagesList}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="0"
+                            StrokeShape="RoundRectangle 15"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                        <Grid>
+                            <customControl:PinchToZoomContainer>
+                                <Image Source="{Binding .}"
+                                                            x:Name="MainImage"
+                                                            Aspect="AspectFit"/>
+                            </customControl:PinchToZoomContainer>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <IndicatorView IsVisible="{Binding IsIndicatorVisible}"
+                       HorizontalOptions="Center"
+                       Grid.Row="1"
+                       x:Name="JobIndicator"
+                       IndicatorColor="{StaticResource Gray}"
+                       SelectedIndicatorColor="{StaticResource Primary}"
+                       Margin="0,0,0,15"
+                       IndicatorSize="7">
+        </IndicatorView>
+    </Grid>
+
+</ContentPage>
